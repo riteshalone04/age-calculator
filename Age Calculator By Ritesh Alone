@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AGE CALCULATOR (DESIGNED BY RITESH ALONE)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            margin-top: 60px;
+            padding: 40px 30px 30px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #2c3e50;
+        }
+        label {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 7px;
+            margin: 4px 6px 18px 0;
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid #bbb;
+        }
+        button {
+            background: #2e86de;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #145da0;
+        }
+        .result {
+            margin-top: 22px;
+            font-size: 1.2em;
+            color: #27ae60;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #888;
+            font-size: 0.95em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AGE CALCULATOR<br><span style="font-size:0.7em;">(DESIGNED BY RITESH ALONE)</span></h1>
+        <form id="ageForm" autocomplete="off">
+            <label for="day">Enter Date of Birth:</label>
+            <input type="number" id="day" name="day" min="1" max="31" placeholder="DD" required>
+            <input type="number" id="month" name="month" min="1" max="12" placeholder="MM" required>
+            <input type="number" id="year" name="year" min="1900" max="2100" placeholder="YYYY" required>
+            <br>
+            <button type="submit">Calculate Age</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <div class="footer">© 2025 Ritesh Alone</div>
+    <script>
+        document.getElementById('ageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Get DOB values
+            const d = parseInt(document.getElementById('day').value, 10);
+            const m = parseInt(document.getElementById('month').value, 10);
+            const y = parseInt(document.getElementById('year').value, 10);
+
+            // Get today
+            const today = new Date();
+            let cy = today.getFullYear();
+            let cm = today.getMonth() + 1;
+            let cd = today.getDate();
+
+            let age = cy - y - ((cm < m) || (cm === m && cd < d) ? 1 : 0);
+
+            let resultDiv = document.getElementById('result');
+            if (age < 0 || y < 1900 || m < 1 || m > 12 || d < 1 || d > 31) {
+                resultDiv.style.color = "#c0392b";
+                resultDiv.textContent = "Invalid Date of Birth";
+            } else {
+                resultDiv.style.color = "#27ae60";
+                resultDiv.textContent = "Your age: " + age + " years";
+            }
+        });
+    </script>
+</body>
+</html>
